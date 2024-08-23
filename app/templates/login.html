@@ -1,0 +1,23 @@
+<!-- login.html -->
+
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Login</h1>
+  <form method="POST" action="{{ url_for('routes.login') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.email.label }} {{ form.email(class="form-control") }} {% if
+      form.email.errors %} {% for error in form.email.errors %}
+      <div class="alert alert-danger">{{ error }}</div>
+      {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.password.label }} {{ form.password(class="form-control") }} {% if
+      form.password.errors %} {% for error in form.password.errors %}
+      <div class="alert alert-danger">{{ error }}</div>
+      {% endfor %} {% endif %}
+    </div>
+    <div class="form-group">{{ form.submit(class="btn btn-primary") }}</div>
+  </form>
+</div>
+{% endblock %}

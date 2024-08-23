@@ -1,0 +1,74 @@
+<!-- index.html -->
+
+{% extends 'base.html' %} {% block content %}
+<section class="hero">
+  <div class="container">
+    <h1 class="animate-on-scroll">Master Your Coding Skills</h1>
+    <p class="animate-on-scroll">
+      Challenge yourself with personalized coding exercises and climb the
+      leaderboard!
+    </p>
+    {% if current_user.is_authenticated %}
+    <a
+      href="{{ url_for('routes.dashboard') }}"
+      class="cta-button animate-on-scroll"
+      >Go to Dashboard</a
+    >
+    {% else %}
+    <a
+      href="{{ url_for('routes.register') }}"
+      class="cta-button animate-on-scroll"
+      >Get Started</a
+    >
+    {% endif %}
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <h2 class="animate-on-scroll">Why Choose Our Platform?</h2>
+    <div class="feature-grid">
+      <div class="feature-card animate-on-scroll">
+        <i class="fas fa-code"></i>
+        <h3>Personalized Challenges</h3>
+        <p>Get coding challenges tailored to your skill level and interests.</p>
+      </div>
+      <div class="feature-card animate-on-scroll">
+        <i class="fas fa-trophy"></i>
+        <h3>Competitive Leaderboard</h3>
+        <p>Compete with other coders and see where you stand.</p>
+      </div>
+      <div class="feature-card animate-on-scroll">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Skill Progression</h3>
+        <p>
+          Track your progress and watch your coding skills improve over time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2 class="animate-on-scroll">Ready to Start Coding?</h2>
+    <p class="animate-on-scroll">
+      Join our community of passionate coders and take your skills to the next
+      level!
+    </p>
+    {% if current_user.is_authenticated %}
+    <a
+      href="{{ url_for('routes.dashboard') }}"
+      class="cta-button animate-on-scroll"
+      >View Challenges</a
+    >
+    {% else %}
+    <a
+      href="{{ url_for('routes.register') }}"
+      class="cta-button animate-on-scroll"
+      >Sign Up Now</a
+    >
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

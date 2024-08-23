@@ -1,0 +1,66 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}AI code challenge{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navbar-content">
+        <a href="{{ url_for('routes.index') }}" class="navbar-logo">AI code challenge</a>
+        <div class="navbar-links">
+          <a href="{{ url_for('routes.index') }}">Home</a>
+          {% if current_user.is_authenticated %}
+          <a href="{{ url_for('routes.dashboard') }}">Dashboard</a>
+          <a href="{{ url_for('routes.profile') }}">Profile</a>
+          <a href="{{ url_for('routes.leaderboard') }}">Leaderboard</a>
+          <a href="{{ url_for('routes.logout') }}">Logout</a>
+          {% else %}
+          <a href="{{ url_for('routes.register') }}">Register</a>
+          <a href="{{ url_for('routes.login') }}">Login</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+    </div>
+
+    <div class="message">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }} fade-in">
+        <i class="fas fa-info-circle"></i>
+        {{ message }}
+        <button
+          class="close-btn"
+          onclick="this.parentElement.style.display='none'"
+        >
+          &times;
+        </button>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

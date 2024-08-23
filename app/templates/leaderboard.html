@@ -1,0 +1,27 @@
+<!-- leaderboard.html -->
+
+{% extends 'base.html' %} {% block content %}
+<div class="leaderboard">
+  <h1>Leaderboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Skill Level</th>
+        <th>Completed Challenges</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.skill_level }}</td>
+        <td>{{ user.completed_challenges|length }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

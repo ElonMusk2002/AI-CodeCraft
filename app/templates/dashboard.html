@@ -1,0 +1,78 @@
+<!-- dashboard.html -->
+
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1 class="text-center">Coding Challenges</h1>
+
+  <div class="generate-challenge text-center my-4">
+    <button id="generate-challenge-btn" class="btn btn-primary">
+      Generate New Challenge
+    </button>
+    <div id="challenge-container"></div>
+  </div>
+
+  <div class="challenges-container">
+    {% if challenges|length == 0 %}
+    <p class="text-center">
+      No coding challenges available yet. Please check back later.
+    </p>
+    {% else %}
+    <div class="row">
+      {% for challenge in challenges %}
+      <div class="col-md-4 mb-4">
+        <div class="challenge-card">
+          <h3>{{ challenge.title }}</h3>
+          <p><strong>Difficulty:</strong> {{ challenge.difficulty }}</p>
+          <p>
+            <strong>Programming Language:</strong> {{
+            challenge.programming_language }}
+          </p>
+          <p><strong>Topic:</strong> {{ challenge.topic }}</p>
+          <p class="challenge-description-summary">
+            {{ challenge.description|truncatewords(10) }}
+          </p>
+          <p class="challenge-description-full hidden">
+            {{ challenge.description }}
+          </p>
+
+          {% if challenge in current_user.completed_challenges %}
+          <button class="complete-challenge btn btn-success disabled" disabled>
+            Completed
+          </button>
+          {% else %}
+          <button
+            class="show-solution-form btn btn-primary"
+            data-challenge-id="{{ challenge.id }}"
+          >
+            Complete
+          </button>
+          <form
+            class="challenge-form hidden"
+            data-challenge-id="{{ challenge.id }}"
+            action="{{ url_for('routes.complete_challenge', challenge_id=challenge.id) }}"
+            method="post"
+          >
+            <div class="form-group">
+              <textarea
+                name="solution"
+                placeholder="Enter your solution here"
+                rows="6"
+                class="form-control mt-3"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Submit Solution
+            </button>
+          </form>
+          {% endif %}
+          <button class="show-more-btn btn btn-secondary mt-2">
+            Show More
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
