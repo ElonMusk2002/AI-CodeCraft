@@ -9,7 +9,10 @@
 
 CodeCraft is a simple web application that generates personalized coding challenges for users based on their skill level, preferred programming languages, and topics of interest. It leverages Google's Gemini AI to create unique challenges and evaluate user solutions.
 
-<video controls src="demo/20240821131640.mp4" title="Title"></video>
+## Demo
+
+A demonstration video of CodeCraft in action is available in the `demo` folder of this repository. 
+
 
 ## Features
 
